@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sam Altman's Y Combinator Era</title>
+    <style>
+        :root {
+            --primary: #ff6b00;
+            --secondary: #333;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --white: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: var(--dark);
+            color: var(--white);
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .header-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://helios-i.mashable.com/imagery/articles/06Fa7ihLGe6tyesC5lDXnE7/hero-image.fill.size_1248x702.v1623367987.jpg');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.3;
+            z-index: 1;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin: 2rem 0 1rem;
+            color: var(--primary);
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            margin: 1.5rem 0 1rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        .intro {
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 2rem;
+            display: block;
+            border: 5px solid var(--primary);
+            transition: transform 0.3s ease;
+        }
+        
+        .profile-img:hover {
+            transform: scale(1.05);
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 3rem auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: var(--primary);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -12px;
+            background-color: var(--white);
+            border: 4px solid var(--primary);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        
+        .left {
+            left: 0;
+        }
+        
+        .right {
+            left: 50%;
+        }
+        
+        .right::after {
+            left: -12px;
+        }
+        
+        .timeline-content {
+            padding: 20px;
+            background-color: var(--white);
+            position: relative;
+            border-radius: 6px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        
+        .timeline-year {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stats-section {
+            background-color: var(--dark);
+            color: var(--white);
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .stats-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-top: 2rem;
+        }
+        
+        .stat-card {
+            background-color: var(--white);
+            color: var(--dark);
+            padding: 1.5rem;
+            border-radius: 8px;
+            width: 250px;
+            margin: 1rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin: 1rem 0;
+        }
+        
+        .companies-section {
+            padding: 3rem 0;
+        }
+        
+        .companies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .company-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .company-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .company-logo {
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--light);
+            padding: 1rem;
+        }
+        
+        .company-logo img {
+            max-height: 80px;
+            max-width: 80%;
+        }
+        
+        .company-info {
+            padding: 1.5rem;
+        }
+        
+        .quote-section {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .quote {
+            font-size: 1.5rem;
+            font-style: italic;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .quote-author {
+            margin-top: 1rem;
+            font-weight: bold;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+        
+        .btn:hover {
+            background-color: #e05a00;
+        }
+        
+        @media screen and (max-width: 768px) {
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item::after {
+                left: 18px;
+            }
+            
+            .left::after, .right::after {
+                left: 18px;
+            }
+            
+            .right {
+                left: 0;
+            }
+            
+            .stat-card {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+        
+        #chart-container {
+            width: 100%;
+            height: 300px;
+            margin: 2rem auto;
+        }
+        
+        .chart-bar {
+            fill: var(--primary);
+            transition: fill 0.3s ease;
+        }
+        
+        .chart-bar:hover {
+            fill: #e05a00;
+        }
+        
+        .chart-label {
+            font-size: 12px;
+            text-anchor: middle;
+        }
+        
+        .chart-value {
+            font-size: 12px;
+            text-anchor: middle;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-bg"></div>
+        <div class="header-content container">
+            <h1>Sam Altman's Y Combinator Era</h1>
+            <p>Transforming the startup ecosystem from 2014 to 2019</p>
+        </div>
+    </header>
+    
+    <section class="intro container">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Sam_Altman_TechCrunch_SF_2019_Day_2_Oct_3_%28cropped%29.jpg/960px-Sam_Altman_TechCrunch_SF_2019_Day_2_Oct_3_%28cropped%29.jpg" alt="Sam Altman" class="profile-img">
+        <h2>The Visionary Leader</h2>
+        <p>Sam Altman served as the president of Y Combinator from 2014 to 2019, during which he transformed the accelerator into a global powerhouse for startup innovation. Under his leadership, YC expanded its reach, funded thousands of companies, and launched several groundbreaking initiatives that continue to shape the tech industry today.</p>
+        <button class="btn" id="scroll-to-timeline">Explore His Journey</button>
+    </section>
+    
+    <div class="timeline container" id="timeline">
+        <div class="timeline-item left">
+            <div class="timeline-content">
+                <div class="timeline-year">2014</div>
+                <h3>Appointed as President</h3>
+                <p>Sam Altman was appointed as the president of Y Combinator, taking over from co-founder Paul Graham. He immediately set ambitious goals for the accelerator's growth and impact.</p>
+            </div>
+        </div>
+        
+        <div class="timeline-item right">
+            <div class="timeline-content">
+                <div class="timeline-year">2015</div>
+                <h3>Expansion Vision</h3>
+                <p>Altman announced his goal to expand YC to fund 1,000 companies per year, a bold vision that would dramatically increase the accelerator's scale and influence in the startup ecosystem.</p>
+            </div>
+        </div>
+        
+        <div class="timeline-item left">
+            <div class="timeline-content">
+                <div class="timeline-year">2015</div>
+                <h3>Launch of YC Continuity</h3>
+                <p>Established YC Continuity, a $700 million equity fund designed to help successful YC companies scale beyond their initial funding rounds, providing crucial growth capital.</p>
+            </div>
+        </div>
+        
+        <div class="timeline-item right">
+            <div class="timeline-content">
+                <div class="timeline-year">2015</div>
+                <h3>Introduction of YC Research</h3>
+                <p>Founded YC Research, a non-profit research lab focused on developing breakthrough technologies for the future. Altman personally donated $10 million to kickstart this initiative.</p>
+            </div>
+        </div>
+        
+        <div class="timeline-item left">
+            <div class="timeline-content">
+                <div class="timeline-year">2016-2018</div>
+                <h3>Nurturing Unicorns</h3>
+                <p>During this period, Altman played a crucial role in nurturing successful startups like Dropbox, Airbnb, and Reddit, helping them grow into multi-billion dollar companies.</p>
+            </div>
+        </div>
+        
+        <div class="timeline-item right">
+            <div class="timeline-content">
+                <div class="timeline-year">2018</div>
+                <h3>Transition to YC Group</h3>
+                <p>Transitioned to become the President of the YC Group, overseeing all of Y Combinator's initiatives and expanding its global footprint.</p>
+            </div>
+        </div>
+        
+        <div class="timeline-item left">
+            <div class="timeline-content">
+                <div class="timeline-year">2019</div>
+                <h3>Stepping Down</h3>
+                <p>By the time Altman stepped down in 2019, YC had helped approximately 1,900 companies, creating a combined valuation of over $100 billion and revolutionizing the startup accelerator model.</p>
+            </div>
+        </div>
+    </div>
+    
+    <section class="stats-section">
+        <div class="container">
+            <h2>Impact in Numbers</h2>
+            <p>Sam Altman's leadership at Y Combinator resulted in unprecedented growth and impact</p>
+            
+            <div class="stats-container">
+                <div class="stat-card">
+                    <h3>Companies Funded</h3>
+                    <div class="stat-number" id="companies-counter">1900</div>
+                    <p>Startups received YC funding during Altman's tenure</p>
+                </div>
+                
+                <div class="stat-card">
+                    <h3>YC Continuity Fund</h3>
+                    <div class="stat-number" id="fund-counter">$700M</div>
+                    <p>Growth capital for scaling YC companies</p>
+                </div>
+                
+                <div class="stat-card">
+                    <h3>Personal Donation</h3>
+                    <div class="stat-number" id="donation-counter">$10M</div>
+                    <p>Altman's contribution to YC Research</p>
+                </div>
+            </div>
+            
+            <div id="chart-container">
+                <svg width="100%" height="100%" id="growth-chart"></svg>
+            </div>
+        </div>
+    </section>
+    
+    <section class="companies-section container">
+        <h2>Notable YC Companies Under Altman's Leadership</h2>
+        <p>Sam Altman helped nurture some of the most successful startups in tech history</p>
+        
+        <div class="companies-grid">
+            <div class="company-card">
+                <div class="company-logo">
+                    <span style="font-size: 24px; font-weight: bold; color: #0061fe;">Dropbox</span>
+                </div>
+                <div class="company-info">
+                    <h3>Dropbox</h3>
+                    <p>Cloud storage and file synchronization service that went public in 2018 with a valuation of over $12 billion.</p>
+                </div>
+            </div>
+            
+            <div class="company-card">
+                <div class="company-logo">
+                    <span style="font-size: 24px; font-weight: bold; color: #ff5a5f;">Airbnb</span>
+                </div>
+                <div class="company-info">
+                    <h3>Airbnb</h3>
+                    <p>Revolutionized the hospitality industry with its peer-to-peer lodging platform, reaching a valuation of over $100 billion.</p>
+                </div>
+            </div>
+            
+            <div class="company-card">
+                <div class="company-logo">
+                    <span style="font-size: 24px; font-weight: bold; color: #ff4500;">Reddit</span>
+                </div>
+                <div class="company-info">
+                    <h3>Reddit</h3>
+                    <p>Social news aggregation and discussion platform that became one of the most visited websites in the world.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="quote-section">
+        <div class="container">
+            <div class="quote">
+                "The best thing we can do is to make sure that we're building a world where every individual is empowered to be creative, to pursue their vision, and to make a mark on the world."
+            </div>
+            <div class="quote-author">- Sam Altman</div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p>Sam Altman's legacy at Y Combinator continues to influence the startup ecosystem worldwide.</p>
+            <button class="btn" id="back-to-top">Back to Top</button>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scrolling
+            document.getElementById('scroll-to-timeline').addEventListener('click', function() {
+                document.getElementById('timeline').scrollIntoView({ behavior: 'smooth' });
+            });
+            
+            document.getElementById('back-to-top').addEventListener('click', function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+            
+            // Counter animation
+            function animateCounter(elementId, target, duration) {
+                const element = document.getElementById(elementId);
+                const start = 0;
+                const increment = target / (duration / 16);
+                let current = start;
+                
+                const timer = setInterval(function() {
+                    current += increment;
+                    if (current >= target) {
+                        clearInterval(timer);
+                        current = target;
+                    }
+                    
+                    if (elementId === 'fund-counter' || elementId === 'donation-counter') {
+                        element.textContent = '$' + Math.floor(current) + 'M';
+                    } else {
+                        element.textContent = Math.floor(current);
+                    }
+                }, 16);
+            }
+            
+            // Intersection Observer for animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        if (entry.target.id === 'companies-counter') {
+                            animateCounter('companies-counter', 1900, 2000);
+                            animateCounter('fund-counter', 700, 2000);
+                            animateCounter('donation-counter', 10, 2000);
+                            createChart();
+                        }
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            observer.observe(document.getElementById('companies-counter'));
+            
+            // Create bar chart
+            function createChart() {
+                const data = [
+                    { year: '2014', companies: 200 },
+                    { year: '2015', companies: 350 },
+                    { year: '2016', companies: 500 },
+                    { year: '2017', companies: 650 },
+                    { year: '2018', companies: 800 },
+                    { year: '2019', companies: 1900 }
+                ];
+                
+                const svg = document.getElementById('growth-chart');
+                const width = svg.clientWidth;
+                const height = svg.clientHeight;
+                const margin = { top: 40, right: 20, bottom: 60, left: 60 };
+                const chartWidth = width - margin.left - margin.right;
+                const chartHeight = height - margin.top - margin.bottom;
+                
+                // Clear previous chart if any
+                svg.innerHTML = '';
+                
+                // Create chart group
+                const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+                g.setAttribute('transform', `translate(${margin.left},${margin.top})`);
+                svg.appendChild(g);
+                
+                // Add title
+                const title = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                title.setAttribute('x', chartWidth / 2);
+                title.setAttribute('y', -10);
+                title.setAttribute('text-anchor', 'middle');
+                title.setAttribute('font-size', '16px');
+                title.setAttribute('font-weight', 'bold');
+                title.textContent = 'YC Companies Growth Under Altman';
+                g.appendChild(title);
+                
+                // X axis
+                const xScale = chartWidth / data.length;
+                
+                // Y axis
+                const maxValue = Math.max(...data.map(d => d.companies));
+                const yScale = chartHeight / maxValue;
+                
+                // Create bars
+                data.forEach((d, i) => {
+                    const barWidth = xScale * 0.7;
+                    const barHeight = d.companies * yScale;
+                    const x = i * xScale + (xScale - barWidth) / 2;
+                    const y = chartHeight - barHeight;
+                    
+                    const bar = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+                    bar.setAttribute('class', 'chart-bar');
+                    bar.setAttribute('x', x);
+                    bar.setAttribute('y', y);
+                    bar.setAttribute('width', barWidth);
+                    bar.setAttribute('height', barHeight);
+                    g.appendChild(bar);
+                    
+                    // X axis label
+                    const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    label.setAttribute('class', 'chart-label');
+                    label.setAttribute('x', x + barWidth / 2);
+                    label.setAttribute('y', chartHeight + 20);
+                    label.textContent = d.year;
+                    g.appendChild(label);
+                    
+                    // Value label
+                    const value = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    value.setAttribute('class', 'chart-value');
+                    value.setAttribute('x', x + barWidth / 2);
+                    value.setAttribute('y', y - 5);
+                    value.textContent = d.companies;
+                    g.appendChild(value);
+                });
+            }
+            
+            // Handle window resize for responsive chart
+            window.addEventListener('resize', createChart);
+        });
+    </script>
+</body>
+</html>
