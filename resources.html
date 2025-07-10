@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sam Altman Resources</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .header-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, transparent 20%, var(--secondary-color) 150%);
+            opacity: 0.7;
+            z-index: 1;
+        }
+        
+        nav {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-links a {
+            color: var(--dark-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark-color);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        
+        .section {
+            margin-bottom: 3rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            transition: var(--transition);
+        }
+        
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--light-color);
+        }
+        
+        h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+        
+        p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .resource-list {
+            list-style: none;
+        }
+        
+        .resource-item {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            border-radius: 6px;
+            background-color: var(--light-color);
+            transition: var(--transition);
+        }
+        
+        .resource-item:hover {
+            background-color: #e3e8eb;
+            transform: translateX(5px);
+        }
+        
+        .resource-item a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 500;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: var(--transition);
+        }
+        
+        .resource-item a:hover {
+            color: var(--primary-color);
+        }
+        
+        .resource-item p {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0;
+        }
+        
+        .tag {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-right: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .stats-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            flex: 1;
+            min-width: 200px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            margin: 0.5rem;
+            text-align: center;
+            transition: var(--transition);
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            color: var(--dark-color);
+            font-weight: 500;
+        }
+        
+        .chart-container {
+            height: 300px;
+            margin-bottom: 2rem;
+        }
+        
+        footer {
+            background-color: var(--secondary-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin: 1rem 0;
+        }
+        
+        .footer-links li {
+            margin: 0 1rem;
+        }
+        
+        .footer-links a {
+            color: var(--light-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: var(--primary-color);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            box-shadow: var(--shadow);
+            opacity: 0;
+            transition: var(--transition);
+            pointer-events: none;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        .back-to-top:hover {
+            background-color: #2980b9;
+            transform: translateY(-5px);
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                padding: 1rem 0;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 0.5rem 1rem;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .stats-container {
+                flex-direction: column;
+            }
+            
+            .stat-card {
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-bg"></div>
+        <div class="header-content">
+            <h1>Sam Altman Resources</h1>
+            <p>A comprehensive collection of resources about the tech visionary and OpenAI CEO</p>
+        </div>
+    </header>
+    
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Sam Altman</div>
+            <ul class="nav-links">
+                <li><a href="#official">Official Websites</a></li>
+                <li><a href="#interviews">Interviews & Talks</a></li>
+                <li><a href="#articles">Articles & Profiles</a></li>
+                <li><a href="#stats">Stats & Impact</a></li>
+            </ul>
+            <button class="hamburger">☰</button>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <section class="section" id="official">
+            <h2>Official Websites</h2>
+            <ul class="resource-list">
+                <li class="resource-item">
+                    <a href="https://openai.com" target="_blank">OpenAI</a>
+                    <p>The official website of OpenAI, the AI research and deployment company led by Sam Altman.</p>
+                    <span class="tag">Official</span>
+                    <span class="tag">Company</span>
+                </li>
+                <li class="resource-item">
+                    <a href="https://blog.samaltman.com" target="_blank">Sam Altman's Blog</a>
+                    <p>Personal blog where Sam shares his thoughts on technology, startups, and the future.</p>
+                    <span class="tag">Official</span>
+                    <span class="tag">Blog</span>
+                </li>
+                <li class="resource-item">
+                    <a href="https://twitter.com/sama" target="_blank">Sam Altman on Twitter</a>
+                    <p>Follow Sam's updates, thoughts, and interactions on Twitter.</p>
+                    <span class="tag">Official</span>
+                    <span class="tag">Social Media</span>
+                </li>
+                <li class="resource-item">
+                    <a href="https://www.linkedin.com/in/samaltman/" target="_blank">LinkedIn Profile</a>
+                    <p>Sam's professional background and connections on LinkedIn.</p>
+                    <span class="tag">Official</span>
+                    <span class="tag">Professional</span>
+                </li>
+            </ul>
+        </section>
+        
+        <section class="section" id="interviews">
+            <h2>Key Interviews & Talks</h2>
+            <ul class="resource-list">
+                <li class="resource-item">
+                    <a href="https://www.youtube.com/watch?v=L_Guz73e6fw" target="_blank">Sam Altman: OpenAI CEO on GPT-4, ChatGPT, and the Future of AI | Lex Fridman Podcast</a>
+                    <p>In-depth conversation with Lex Fridman about AI development and its implications.</p>
+                    <span class="tag">Video</span>
+                    <span class="tag">Podcast</span>
+                </li>
+                <li class="resource-item">
+                    <a href="https://www.ted.com/talks/sam_altman_the_awe_inspiring_journey_of_chatgpt" target="_blank">TED Talk: The awe-inspiring journey of ChatGPT</a>
+                    <p>Sam discusses the development of ChatGPT and the future of AI technology.</p>
+                    <span class="tag">Video</span>
+                    <span class="tag">TED</span>
+                </li>
+                <li class="resource-item">
+                    <a href="https://www.youtube.com/watch?v=WHoWGNQRXb0" target="_blank">Sam Altman at Stanford University: How to Build the Future</a>
+                    <p>Lecture at Stanford about entrepreneurship and building impactful companies.</p>
+                    <span class="tag">Video</span>
+                    <span class="tag">Education</span>
+                </li>
+                <li class="resource-item">
+                    <a href="https://www.youtube.com/watch?v=L_Guz73e6fw" target="_blank">Sam Altman on AI Safety and the Future of Humanity</a>
+                    <p>Discussion about the importance of AI safety and responsible development.</p>
+                    <span class="tag">Video</span>
+                    <span class="tag">AI Safety</span>
+                </li>
+            </ul>
+        </section>
+        
+        <section class="section" id="articles">
+            <h2>In-Depth Articles & Profiles</h2>
+            <ul class="resource-list">
+                <li class="resource-item">
+                    <a href="https://time.com/6266923/sam-altman-openai-profile/" target="_blank">TIME Magazine: The Inside Story of ChatGPT's Astonishing Potential</a>
+                    <p>Profile of Sam Altman and the development of ChatGPT at OpenAI.</p>
+                    <span class="tag">Article</span>
+                    <span class="tag">TIME</span>
+                </li>
+                <li class="resource-item">
+                    <a href="https://www.newyorker.com/magazine/2023/10/02/sam-altman-openai-profile" target="_blank">The New Yorker: The Philosopher King of Silicon Valley</a>
+                    <p>In-depth profile exploring Sam's vision and impact on the tech industry.</p>
+                    <span class="tag">Article</span>
+                    <span class="tag">The New Yorker</span>
+                </li>
+                <li class="resource-item">
+                    <a href="https://techcrunch.com/2023/05/16/openai-ceo-sam-altman-testifies-before-congress-tomorrow-heres-what-to-expect/" target="_blank">TechCrunch: OpenAI CEO Sam Altman Testifies Before Congress</a>
+                    <p>Coverage of Sam's congressional testimony on AI regulation.</p>
+                    <span class="tag">Article</span>
+                    <span class="tag">TechCrunch</span>
+                </li>
+                <li class="resource-item">
+                    <a href="https://www.wired.com/story/sam-altman-openai-chatgpt-gpt4/" target="_blank">WIRED: The Race to Build a ChatGPT-Powered Search Engine</a>
+                    <p>Article about OpenAI's impact on search technology under Sam's leadership.</p>
+                    <span class="tag">Article</span>
+                    <span class="tag">WIRED</span>
+                </li>
+            </ul>
+        </section>
+        
+        <section class="section" id="stats">
+            <h2>Stats & Impact</h2>
+            <div class="stats-container">
+                <div class="stat-card">
+                    <div class="stat-number">2015</div>
+                    <div class="stat-label">Year Sam became CEO of OpenAI</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">100M+</div>
+                    <div class="stat-label">ChatGPT Users</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">$80B+</div>
+                    <div class="stat-label">OpenAI Valuation</div>
+                </div>
+            </div>
+            
+            <h3>Timeline of Key Achievements</h3>
+            <div class="chart-container">
+                <canvas id="timelineChart"></canvas>
+            </div>
+            
+            <h3>Publications by Topic</h3>
+            <div class="chart-container">
+                <canvas id="topicsChart"></canvas>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <p>Sam Altman Resources - A comprehensive collection of information about the tech visionary</p>
+            <ul class="footer-links">
+                <li><a href="#official">Official Websites</a></li>
+                <li><a href="#interviews">Interviews & Talks</a></li>
+                <li><a href="#articles">Articles & Profiles</a></li>
+                <li><a href="#stats">Stats & Impact</a></li>
+            </ul>
+            <p>&copy; 2023 Sam Altman Resources. This is an unofficial fan site.</p>
+        </div>
+    </footer>
+    
+    <a href="#" class="back-to-top" id="backToTop">↑</a>
+    
+    <script>
+        // Mobile navigation toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+        
+        // Back to top button
+        const backToTopButton = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+        
+        // Simple chart rendering
+        function renderCharts() {
+            // Timeline chart
+            const timelineCanvas = document.getElementById('timelineChart');
+            const timelineCtx = timelineCanvas.getContext('2d');
+            
+            // Set canvas dimensions
+            timelineCanvas.width = timelineCanvas.parentElement.offsetWidth;
+            timelineCanvas.height = timelineCanvas.parentElement.offsetHeight;
+            
+            // Draw timeline
+            const years = [2005, 2010, 2015, 2020, 2023];
+            const events = [
+                "Started at Y Combinator",
+                "Became Y Combinator President",
+                "Co-founded OpenAI",
+                "Released GPT-3",
+                "Released ChatGPT & GPT-4"
+            ];
+            
+            timelineCtx.fillStyle = '#f9f9f9';
+            timelineCtx.fillRect(0, 0, timelineCanvas.width, timelineCanvas.height);
+            
+            const lineY = timelineCanvas.height / 2;
+            const segmentWidth = timelineCanvas.width / (years.length - 1);
+            
+            // Draw line
+            timelineCtx.beginPath();
+            timelineCtx.moveTo(0, lineY);
+            timelineCtx.lineTo(timelineCanvas.width, lineY);
+            timelineCtx.strokeStyle = '#3498db';
+            timelineCtx.lineWidth = 4;
+            timelineCtx.stroke();
+            
+            // Draw points and labels
+            years.forEach((year, index) => {
+                const x = index * segmentWidth;
+                
+                // Draw point
+                timelineCtx.beginPath();
+                timelineCtx.arc(x, lineY, 10, 0, Math.PI * 2);
+                timelineCtx.fillStyle = '#3498db';
+                timelineCtx.fill();
+                
+                // Draw year
+                timelineCtx.font = 'bold 16px Arial';
+                timelineCtx.fillStyle = '#2c3e50';
+                timelineCtx.textAlign = 'center';
+                timelineCtx.fillText(year, x, lineY + 30);
+                
+                // Draw event
+                timelineCtx.font = '14px Arial';
+                timelineCtx.fillStyle = '#34495e';
+                timelineCtx.textAlign = 'center';
+                timelineCtx.fillText(events[index], x, index % 2 === 0 ? lineY - 30 : lineY + 60);
+            });
+            
+            // Topics chart (simple bar chart)
+            const topicsCanvas = document.getElementById('topicsChart');
+            const topicsCtx = topicsCanvas.getContext('2d');
+            
+            // Set canvas dimensions
+            topicsCanvas.width = topicsCanvas.parentElement.offsetWidth;
+            topicsCanvas.height = topicsCanvas.parentElement.offsetHeight;
+            
+            // Data
+            const topics = ['AI Safety', 'Startups', 'Technology', 'Leadership', 'Future'];
+            const counts = [42, 35, 28, 20, 15];
+            const maxCount = Math.max(...counts);
+            const barWidth = topicsCanvas.width / (topics.length * 2);
+            const spacing = barWidth;
+            
+            // Draw bars
+            topics.forEach((topic, index) => {
+                const x = spacing + index * (barWidth + spacing);
+                const barHeight = (counts[index] / maxCount) * (topicsCanvas.height - 100);
+                const y = topicsCanvas.height - 60 - barHeight;
+                
+                // Draw bar
+                topicsCtx.fillStyle = '#3498db';
+                topicsCtx.fillRect(x, y, barWidth, barHeight);
+                
+                // Draw topic label
+                topicsCtx.font = '14px Arial';
+                topicsCtx.fillStyle = '#2c3e50';
+                topicsCtx.textAlign = 'center';
+                topicsCtx.fillText(topic, x + barWidth / 2, topicsCanvas.height - 30);
+                
+                // Draw count
+                topicsCtx.font = 'bold 14px Arial';
+                topicsCtx.fillStyle = '#2c3e50';
+                topicsCtx.textAlign = 'center';
+                topicsCtx.fillText(counts[index], x + barWidth / 2, y - 10);
+            });
+        }
+        
+        // Render charts when page loads and on resize
+        window.addEventListener('load', renderCharts);
+        window.addEventListener('resize', renderCharts);
+    </script>
+</body>
+</html>
